@@ -1,6 +1,7 @@
 package com.trade.users.handlers;
 
 import com.trade.users.dtos.ErrorResponse;
+import com.trade.users.exceptions.InsufficientFundsException;
 import com.trade.users.exceptions.UserAlreadyExistsException;
 import com.trade.users.exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,16 @@ public class GlobalExceptionHandler {
                 LocalDateTime.now()
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(InsufficientFundsException.class)
+    public ResponseEntity<ErrorResponse> handleInsufficientFundsException(InsufficientFundsException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                ex.getMessage(),
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                LocalDateTime.now()
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(Exception.class)
