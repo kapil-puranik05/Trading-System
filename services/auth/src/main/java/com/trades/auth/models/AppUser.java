@@ -1,10 +1,8 @@
-package com.trade.users.models;
+package com.trades.auth.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -15,12 +13,12 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(nullable = false)
+    private String username;
+
     @Column(nullable = false, unique = true)
-    private UUID userId;
+    private String email;
 
     @Column(nullable = false)
-    private BigDecimal walletBalance;
-
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
+    private String password;
 }
