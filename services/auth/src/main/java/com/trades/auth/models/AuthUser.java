@@ -6,9 +6,9 @@ import lombok.Data;
 import java.util.UUID;
 
 @Entity
-@Table(name = "users")
+@Table(name = "auth_users")
 @Data
-public class AppUser {
+public class AuthUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
